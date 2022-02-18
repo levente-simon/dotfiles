@@ -1,0 +1,50 @@
+startup_message off  # don't display  startup message
+
+backtick 1 3600 3600 whoami
+
+# bottom line
+hardstatus on
+hardstatus alwayslastline
+# hardstatus string "%w"
+hardstatus string '%{= Kw}%t %=%{=b rW}%1`@%H%{= Kw} %{=b gW}%l %{= Kw} %y-%m-%d %0c'
+
+
+# upper line
+# caption always
+# caption string "%{wR}%3n %t %= %{+b .b} %c"
+# caption always "%{wK}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wK}%?%+Lw%? %= %{=b Kw}%110`%109` %{= kw}%111`"
+# caption always "%{wK}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wK}%?%+Lw%?"
+caption always "%{wK}%?%-w%?%{bw}%n %t%{wK}%?%+w%?"
+
+setenv LOCKPRG '/usr/bin/lock -npv' # BSD specific - set the lock prg.
+scrollback 1000      # set the scrollback buffer
+vbell off            # set audio bell
+# idle 900 lockscreen  # lock the screen after 15 mins idle time
+bind l lockscreen    # shortcut to lock the screen C-a C-l
+bind + resize +1     # C-a C-+ => region width +1 row
+bind - resize -1     # C-a C-- => region width -1 row
+bind ^j screen sudo -i # new screen as root
+
+register r "^a:source $HOME/.screenrc" # reload screenrc
+# bindkey -k k5 process r                #
+bindkey -k kI split         # split: Insert 
+bindkey -k k4 split         # split: F4
+register u "^a:resize +1^M^a:fit^M" # region width +1 row :F7
+bindkey -k k7 process u     # 
+register d "^a:resize -1^M^a:fit^M" # region width +1 row : F8
+bindkey -k k8 process d     #
+bindkey -k kD remove        # delete split: Delete
+bindkey -k k5 remove        # delete split: F5
+register t "^a:focus^M"     # switch between splited wins: F6
+bindkey -k k6 process t     #
+
+bindkey -k k9 screen # open new screen tab:   F9
+bindkey -k k1 prev   # switch to prev window: F1
+bindkey -k k2 next   # switch to next window: F2
+bindkey ^[[1;2D prev # switch to prev window: SHIFT+RightArrow
+bindkey ^[[1;2C next # switch to next window: SHIFT+LeftArrow
+# bindkey -k F1 prev   # switch to prev window: F11
+# bindkey -k F2 next   # switch to next window: F12
+bindkey -k k; windowlist -b   # windowlist
+bindkey -k k3 copy
+
